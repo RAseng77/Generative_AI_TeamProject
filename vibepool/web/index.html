@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>VibePool – AI 카풀 매칭 웹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize/modern-normalize.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f4ef;
+      color: #222;
+    }
+    header {
+      padding: 16px;
+      background: #1d3557;
+      color: white;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    header p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      margin-bottom: 10px;
+      background: #fafafa;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      background: #1d3557;
+      color: white;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.05s;
+    }
+    button:hover { opacity: 0.9; }
+    button:active { transform: translateY(1px); }
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .status {
+      font-size: 12px;
+      color: #666;
+      margin-top: 6px;
+    }
+    .result-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .candidate-card {
+      background: white;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #e0e0e0;
+    }
+    .candidate-name {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .candidate-route {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .candidate-tags {
+      font-size: 12px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .candidate-score {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1d3557;
+    }
+    .small {
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VibePool – AI 기반 카풀 매칭</h1>
+    <p>위치 + 시간 + 성향을 고려한 동승자 추천</p>
+  </header>
+
+  <main>
+    <!-- 매칭 요청 영역 -->
+    <section class="card">
+      <h2>매칭 요청</h2>
+
+      <label for="role">역할</label>
+      <select id="role">
+        <option value="guest" selected>게스트(탑승자)</option>
+        <option value="host">호스트(운전자)</option>
+      </select>
+
+      <label for="from">출발지</label>
+      <input id="from" type="text" value="강남" placeholder="예: 강남역" />
+
+      <label for="to">도착지</label>
+      <input id="to" type="text" value="판교" placeholder="예: 판교역" />
+
+      <label for="date">날짜</label>
+      <input id="date" type="date" />
+
+      <label for="timeRange">시간대</label>
+      <select id="timeRange">
+        <option value="07-08">07~08시</option>
+        <option value="08-09" selected>08~09시</option>
+        <option value="09-10">09~10시</option>
+      </select>
+
+      <button id="matchBtn">AI 매칭 실행하기</button>
+      <div id="status" class="status"></div>
+    </section>
+
+    <!-- 매칭 결과 영역 -->
+    <section class="card">
+      <div class="result-title">추천 동승자</div>
+      <div id="results" class="small">아직 매칭을 실행하지 않았습니다.</div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
